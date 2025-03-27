@@ -14,3 +14,7 @@
 ## 获取电脑生成的结果
 
 `getComputerChoice()`:参数为空，返回特定字符串。
+
+## 获取用户输入
+
+`getHumanChoice()`:使用prompt()获取用户输入。

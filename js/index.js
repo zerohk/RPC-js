@@ -9,3 +9,21 @@ function getComputerChoice() {
 }
 
 // console.log(getComputerChoice());
+
+function getHumanChoice() {
+  let userInput;
+  const resultArr = ['rock', 'paper', 'scissors'];
+
+  while (true) {
+    userInput = prompt("Please enter your choice:");
+    if (resultArr.includes(userInput.toLowerCase())) {
+      return userInput;
+    } else {
+      alert("Your input format is not correct,please try again!");
+      continue;
+    }
+  }
+}
+
+
+// console.log(getHumanChoice());
