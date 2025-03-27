@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
   // 随机生成一个1-3的数字
   const ranNum = Math.floor(Math.random() * 3 + 1);
@@ -17,7 +20,7 @@ function getHumanChoice() {
   while (true) {
     userInput = prompt("Please enter your choice:");
     if (resultArr.includes(userInput.toLowerCase())) {
-      return userInput;
+      return userInput.toLowerCase();
     } else {
       alert("Your input format is not correct,please try again!");
       continue;
@@ -27,3 +30,26 @@ function getHumanChoice() {
 
 
 // console.log(getHumanChoice());
+
+function playGround(hunmanChoice, computerChoice) {
+  let human = hunmanChoice();
+  let computer = computerChoice();
+  console.log(`human:${human},computer:${computer}`);
+
+  let results = {
+    "rock": "paper",
+    "paper": "scissors",
+    "scissors": "rock"
+  };
+  if (results[human] == computer) {
+    console.log(`You lose!${computer} beats ${human}`);
+    computerScore++;
+  } else if (human == results[computer]) {
+    console.log(`You win!${human} beats ${computer}`);
+    humanScore++;
+  } else {
+    console.log("You are DRAW!!!");
+  }
+}
+
+playGround(getHumanChoice, getComputerChoice);
