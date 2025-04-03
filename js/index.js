@@ -1,5 +1,15 @@
 let humanScore = 0;
 let computerScore = 0;
+let round = 0;
+// 获取按钮
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const buttons = document.querySelectorAll(".game");
+
+// 获取div
+const result = document.querySelector(".result");
+const scoreText = document.querySelector(".score");
 
 function getComputerChoice() {
   // 随机生成一个1-3的数字
@@ -11,34 +21,14 @@ function getComputerChoice() {
   else return "scissors";
 }
 
-// console.log(getComputerChoice());
-
-function getHumanChoice() {
-  let userInput;
-  const resultArr = ['rock', 'paper', 'scissors'];
-
-  while (true) {
-    userInput = prompt("Please enter your choice:");
-    if (resultArr.includes(userInput.toLowerCase())) {
-      return userInput.toLowerCase();
-    } else {
-      alert("Your input format is not correct,please try again!");
-      continue;
-    }
-  }
-}
-
-
-// console.log(getHumanChoice());
-
 function playGround(hunmanChoice, computerChoice) {
   // let human = hunmanChoice();
+  round++;
   let human = hunmanChoice;
   let computer = computerChoice();
   // console.log(`human:${human},computer:${computer}`);
-  let selectionText = `human:${human},computer:${computer}`;
-  // 清空<div class=result> 原有内容
-  const result = document.querySelector(".result");
+  let selectionText = `Round: ${round} human:${human},computer:${computer}`;
+
   result.textContent = "";
   // 新建一个p，用于显示两者结果
   const selection = document.createElement("p");
@@ -46,8 +36,6 @@ function playGround(hunmanChoice, computerChoice) {
   // 新建一个p，显示对局结果
   const playResult = document.createElement("p");
   let resultText = '';
-
-
   let results = {
     "rock": "paper",
     "paper": "scissors",
@@ -69,40 +57,55 @@ function playGround(hunmanChoice, computerChoice) {
   // 将对局结果保存在第二个p
   playResult.textContent = resultText;
   // 将结果输出到网页
-
   result.appendChild(selection);
   result.appendChild(playResult);
 
 }
 
-// playGround(getHumanChoice, getComputerChoice);
 
+function isFinished() {
+  if (humanScore >= 5 || computerScore >= 5) {
+    disabledAllButtons();
 
-function playGame() {
-
-
-  if (humanScore > computerScore) {
-    console.log(`You win ,your score is ${humanScore}, and computer's score is ${computerScore}`);
-  } else if (humanScore < computerScore) {
-    console.log(`You lose ,your score is ${humanScore}, and computer's score is ${computerScore}`);
-  } else {
-    console.log(`You are draw ,your score is ${humanScore}, and computer's score is ${computerScore}`);
+    if (humanScore > computerScore) {
+      scoreText.textContent = `You win ,your score is ${humanScore}, and computer's score is ${computerScore}`;
+    } else if (humanScore < computerScore) {
+      scoreText.textContent = `You lose ,your score is ${humanScore}, and computer's score is ${computerScore}`;
+    } else {
+      scoreText.textContent = `You are draw ,your score is ${humanScore}, and computer's score is ${computerScore}`;
+    }
   }
 }
 
-// 获取按钮
-const rock = document.querySelector("#rock");
-const paper = document.querySelector("#paper");
-const scissors = document.querySelector("#scissors");
+// 禁用所有按钮
+function disabledAllButtons() {
+
+  buttons.forEach(button => button.disabled = true);
+}
+
+// 启用所有按钮
+function activeAllButtons() {
+  buttons.forEach(button => button.disabled = false);
+}
 
 // 为每个按钮添加点击事件：点击后执行playGround
 // rock.addEventListener("click", playGround("rock", getComputerChoice));
 // paper.addEventListener("click", playGround("paper", getComputerChoice));
 // scissors.addEventListener("click", playGround("scissor", getComputerChoice));
 // 需要用匿名函数包裹playGround,不然会直接执行函数，导致点击事件失效
-rock.addEventListener("click", () => { playGround("rock", getComputerChoice) });
-paper.addEventListener("click", () => { playGround("paper", getComputerChoice) });
-scissors.addEventListener("click", () => { playGround("scissors", getComputerChoice) });
-
+rock.addEventListener("click", () => { playGround("rock", getComputerChoice); isFinished(); });
+paper.addEventListener("click", () => { playGround("paper", getComputerChoice); isFinished() });
+scissors.addEventListener("click", () => { playGround("scissors", getComputerChoice); isFinished() });
 
 // playGame();
+
+// 重置游戏
+const reset = document.querySelector("#reset");
+reset.addEventListener("click", () => {
+  humanScore = 0;
+  computerScore = 0;
+  round = 0;
+  activeAllButtons();
+  result.textContent = "";
+  scoreText.textContent = "";
+})
