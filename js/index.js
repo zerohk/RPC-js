@@ -56,10 +56,7 @@ function playGround(hunmanChoice, computerChoice) {
 
 
 function playGame() {
-  for (let i = 0; i < 5; i++) {
-    alert(`Round ${i + 1}`)
-    playGround(getHumanChoice, getComputerChoice);
-  }
+  
 
   if (humanScore > computerScore) {
     console.log(`You win ,your score is ${humanScore}, and computer's score is ${computerScore}`);
