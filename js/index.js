@@ -27,7 +27,7 @@ function playGround(hunmanChoice, computerChoice) {
   let human = hunmanChoice;
   let computer = computerChoice();
   // console.log(`human:${human},computer:${computer}`);
-  let selectionText = `Round: ${round} human:${human},computer:${computer}`;
+  let selectionText = `Round: ${round} Your choice:${human} Computer choice:${computer}`;
 
   result.textContent = "";
   // 新建一个p，用于显示两者结果
