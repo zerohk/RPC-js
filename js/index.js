@@ -32,7 +32,8 @@ function getHumanChoice() {
 // console.log(getHumanChoice());
 
 function playGround(hunmanChoice, computerChoice) {
-  let human = hunmanChoice();
+  // let human = hunmanChoice();
+  let human = hunmanChoice;
   let computer = computerChoice();
   console.log(`human:${human},computer:${computer}`);
 
@@ -56,7 +57,7 @@ function playGround(hunmanChoice, computerChoice) {
 
 
 function playGame() {
-  
+
 
   if (humanScore > computerScore) {
     console.log(`You win ,your score is ${humanScore}, and computer's score is ${computerScore}`);
@@ -67,4 +68,19 @@ function playGame() {
   }
 }
 
-playGame();
+// 获取按钮
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+// 为每个按钮添加点击事件：点击后执行playGround
+// rock.addEventListener("click", playGround("rock", getComputerChoice));
+// paper.addEventListener("click", playGround("paper", getComputerChoice));
+// scissors.addEventListener("click", playGround("scissor", getComputerChoice));
+// 需要用匿名函数包裹playGround,不然会直接执行函数，导致点击事件失效
+rock.addEventListener("click", () => { playGround("rock", getComputerChoice) });
+paper.addEventListener("click", () => { playGround("paper", getComputerChoice) });
+scissors.addEventListener("click", () => { playGround("scissors", getComputerChoice) });
+
+
+// playGame();
