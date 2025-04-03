@@ -35,7 +35,18 @@ function playGround(hunmanChoice, computerChoice) {
   // let human = hunmanChoice();
   let human = hunmanChoice;
   let computer = computerChoice();
-  console.log(`human:${human},computer:${computer}`);
+  // console.log(`human:${human},computer:${computer}`);
+  let selectionText = `human:${human},computer:${computer}`;
+  // 清空<div class=result> 原有内容
+  const result = document.querySelector(".result");
+  result.textContent = "";
+  // 新建一个p，用于显示两者结果
+  const selection = document.createElement("p");
+  selection.textContent = selectionText;
+  // 新建一个p，显示对局结果
+  const playResult = document.createElement("p");
+  let resultText = '';
+
 
   let results = {
     "rock": "paper",
@@ -43,14 +54,25 @@ function playGround(hunmanChoice, computerChoice) {
     "scissors": "rock"
   };
   if (results[human] == computer) {
-    console.log(`You lose!${computer} beats ${human}`);
+    // console.log(`You lose!${computer} beats ${human}`);
+    resultText = `You lose!${computer} beats ${human}`;
     computerScore++;
   } else if (human == results[computer]) {
-    console.log(`You win!${human} beats ${computer}`);
+    // console.log(`You win!${human} beats ${computer}`);
+    resultText = `You win!${human} beats ${computer}`;
     humanScore++;
   } else {
-    console.log("You are DRAW!!!");
+    // console.log("You are DRAW!!!");
+    resultText = "You are DRAW!!!";
   }
+
+  // 将对局结果保存在第二个p
+  playResult.textContent = resultText;
+  // 将结果输出到网页
+
+  result.appendChild(selection);
+  result.appendChild(playResult);
+
 }
 
 // playGround(getHumanChoice, getComputerChoice);
